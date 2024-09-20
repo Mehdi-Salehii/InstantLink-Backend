@@ -6,6 +6,7 @@ import morgan from "morgan";
 //initialize express app
 const app = express();
 const PORT = process.env.PORT || 3000;
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 //setup utility middlewares
 app.use(cors());
 app.use(morgan("dev"));
@@ -20,7 +21,8 @@ app.get("/", (req: Request, res: Response) => {
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    //client url
+    origin: CLIENT_URL,
     methods: ["GET", "POST"],
   },
 });
